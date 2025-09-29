@@ -19,7 +19,6 @@ model = BertForSequenceClassification.from_pretrained(MODEL_PATH).to(device)
 model.eval()
 
 
-# 在现有代码中添加（如在/predict接口前）
 @app.route("/", methods=["GET"])
 def index():
     # 手动构建响应，确保中文正常显示
@@ -65,7 +64,7 @@ def api_predict():
         "neg_prob": round(neg_prob, 6),  # 可选：保留6位小数，更易读
         "pos_prob": round(pos_prob, 6)
     }
-    # 手动序列化JSON：ensure_ascii=False是核心，关闭中文转义
+    # 手动序列化JSON：ensure_ascii=False关闭中文转义
     response = make_response(json.dumps(result, ensure_ascii=False))
     # 显式指定响应编码为UTF-8，确保客户端正确解析
     response.headers["Content-Type"] = "application/json; charset=utf-8"
