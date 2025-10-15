@@ -14,7 +14,7 @@ bert_model = transformers.BertModel.from_pretrained(
     output_attentions=True  # 配置是否返回注意力权重（默认不返回）
 )
 
-# bert编码函数
+# bert编码函数(这里只有分词和编码，没有embedding)
 def encoder(model_path, sentence):
     # 步骤1：加载与模型配套的分词器
     tokenizer = transformers.BertTokenizer.from_pretrained(model_path)
@@ -40,8 +40,11 @@ if __name__ == "__main__":
         model_path=model_path,
         sentence=sentence
     )
-    # 调用bert模型
+    # print(f"input_ids: {input_ids}, token_type_ids: {token_type_ids}, attention_mask: {attention_mask}")
+
+    # 调用bert模型：包括嵌入层、多层encoder层、生成最终特征
     sentence_outputs = bert_model(input_ids, token_type_ids, attention_mask)    # BERT 模型对输入文本的特征提取结果
+    # print(f"sentence_outputs: {sentence_outputs}")
     
     # 输出结果信息
     print("\n模型运行成功!")
