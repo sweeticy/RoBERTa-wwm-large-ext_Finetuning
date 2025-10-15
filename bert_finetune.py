@@ -102,7 +102,6 @@ def compute_metrics(eval_pred):
 # ----------------------------
 def train_model(model, tokenized_dataset):
     # 配置训练参数
-    print(f"实际训练批次大小: {TRAIN_BATCH_SIZE}")
     training_args = TrainingArguments(
         output_dir=OUTPUT_DIR,
         overwrite_output_dir=True,

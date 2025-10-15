@@ -34,7 +34,7 @@ def encoder(model_path, sentence):
 
 # 测试代码
 if __name__ == "__main__":
-    sentence = "中华人民共和国万岁"
+    sentence = "中华人民共和国万岁"  # 生成token后seq_len=11
     # 生成三种bert需要的输入形式
     input_ids, token_type_ids, attention_mask = encoder(
         model_path=model_path,
@@ -45,9 +45,9 @@ if __name__ == "__main__":
     
     # 输出结果信息
     print("\n模型运行成功!")
-    print("最后一层隐藏状态形状:", sentence_outputs.last_hidden_state.shape)
+    print("最后一层隐藏状态形状:", sentence_outputs.last_hidden_state.shape)    # (batchsize, seq_len, hidden_size)
     print("隐藏层数量:", len(sentence_outputs.hidden_states))  # 包括embedding层和所有encoder层
-    print("注意力层数量:", len(sentence_outputs.attentions))    # 各个层输出维度(1, num_heads, seq_len,seq_len)）
+    print("注意力层数量:", len(sentence_outputs.attentions))    # 各个层输出维度(batchsize, num_heads, seq_len,seq_len))
     
 
 
